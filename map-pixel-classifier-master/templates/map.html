@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+  height: 100%;
+  width: 160px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.main {
+  margin-left: 160px; /* Same as the width of the sidenav */
+  font-size: 28px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
+<style>
+  /* Always set the map height explicitly to define the size of the div
+   * element that contains the map. */
+  #map {
+    height: 100%;
+  }
+  /* Optional: Makes the sample page fill the window. */
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="sidenav">
+  <a href="#contact">Home</a>
+  <a href="{% url 'image:index' %}">Map</a>
+  <a href="{% url 'image:upload' %}">Upload</a>
+  <a href="{% url 'image:list' %}">Images</a>
+</div>
+
+<div id="map" class="main"></div>
+
+<script>
+  var historicalOverlay;
+
+  function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 13,
+      center: {lat: 40.740, lng: -74.18}
+    });
+
+    // var imageBounds = {
+    //   north: 40.773941,
+    //   south: 40.712216,
+    //   east: -74.12544,
+    //   west: -74.22655
+    // };
+
+    var imageBounds = {
+      north: 12.000094413,
+      south: 11.000075240999998,
+      east: -71.9999716425,
+      west: -73.0000331225
+    };
+
+    historicalOverlay = new google.maps.GroundOverlay(
+        'example.png',
+        imageBounds);
+    historicalOverlay.setMap(map);
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwEW9_KvS6Kc9mphuIsGcnUb_Kx57UKtU&callback=initMap"
+async defer></script>
+   
+</body>
+</html> 
